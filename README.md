@@ -10,6 +10,7 @@ In the frontend part of the app, the technologies used are as follows:
 - ExpressJS - For building the backend of this app ([backend repo](https://github.com/Lordhacker756/FyleBackend)🔗)
 - GitHub API - To get the user information
 - Axios - To fetch the data
+- Unit testing using Chai and Mocha
 
 ### What I got to learn from this project 💡
 
@@ -19,6 +20,7 @@ Here are the most important points I learnt while building the frontend of this 
 - Creating controllers in backend made using ExpressJS
 - Using Axios to fetch data
 - GitHub - To properly maintain the codebase, and have the ability to rollback in case of any error.
+- Using chai and mocha for unit testing, till now, I've never used unit testing took 4hrs to debug tests but it's fun!
 
 ### How to use this project 😄
 
@@ -45,6 +47,7 @@ There are two ways to access this app, one is to clone the repository and run it
   - ```/{username}``` - To get the information of the use. It will return a JSON, which will consist of a msg(string), and data(object)
   - ```/{username}/repos``` - To get the repositories of the user. It will return a JSON, which will consist of a msg(string), and data(object)
   - ```/{username}/{repository}``` - To get the programming languages used in the particular repository. It will return a JSON, which will consist of a msg(string), and data(object)
+- You can run the unit tests using the command ```npx mocha --timeout 10000 ./test/index.test.js```
 
 ##### Here's how to access the App directly!😎
 
