@@ -1,15 +1,20 @@
 const express = require("express");
-const app = express();
+export const app = express();
 const axios = require("axios");
 
 // Creating a controller to get user details
 // Controller is a type of callback function which fires everytime a server gets a request in a specified route just like a constructor
+
 const getUserDetails = async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   try {
     const username = req.params.user;  // Getting the username from the request
     const response = await axios.get(
-      `https://api.github.com/users/${username}`
+      `https://api.github.com/users/${username}`, {
+      headers: {
+        'Authorization': "TOKEN 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"
+      }
+    }
     );
     const data = await response.data;
     return res.status(200).json({
@@ -17,7 +22,10 @@ const getUserDetails = async (req, res) => {
       data: data,
     });
   } catch (error) {
-    return res.status(404).json({ msg: "No User Found.!" });
+    return res.status(404).json({
+      msg: "No User Found.!",
+      error: error
+    });
   }
 };
 
@@ -27,7 +35,11 @@ const getUserRepos = async (req, res) => {
   try {
     const username = req.params.user;
     const response = await axios.get(
-      `https://api.github.com/users/${username}/repos`
+      `https://api.github.com/users/${username}/repos?per_page=100&sort="updated"`, {
+      headers: {
+        'Authorization': "TOKEN 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"
+      }
+    }
     );
     const data = await response.data;
     return res.status(200).json({
@@ -35,7 +47,10 @@ const getUserRepos = async (req, res) => {
       data: data,
     });
   } catch (error) {
-    return res.status(404).json({ msg: "error" });
+    return res.status(404).json({
+      msg: "error",
+      error: error
+    });
   }
 };
 
@@ -45,14 +60,21 @@ const getUserRepoLanguages = async (req, res) => {
   try {
     const username = req.params.user;
     const repository = req.params.repo;
-    const data = await axios.get(`https://api.github.com/repos/${username}/${repository}/languages`);
+    const data = await axios.get(`https://api.github.com/repos/${username}/${repository}/languages`, {
+      headers: {
+        'Authorization': "TOKEN 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"
+      }
+    });
     return res.status(200).json({
       msg: "User Repositories Found",
       data: data.data,  // data.data is used because the data is nested in the response
     });
   }
   catch (error) {
-    return res.status(404).json({ msg: "error" });
+    return res.status(404).json({
+      msg: "error",
+      error: error
+    });
   }
 }
 
