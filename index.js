@@ -7,7 +7,7 @@ const axios = require("axios");
 const getUserDetails = async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   try {
-    const username = req.params.user;
+    const username = req.params.user;  // Getting the username from the request
     const response = await axios.get(
       `https://api.github.com/users/${username}`
     );
@@ -39,6 +39,7 @@ const getUserRepos = async (req, res) => {
   }
 };
 
+// Controller to get languages used in the repositories
 const getUserRepoLanguages = async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   try {
@@ -55,6 +56,7 @@ const getUserRepoLanguages = async (req, res) => {
   }
 }
 
+// Routes to get user details, repositories and languages used in the repositories
 app.get("/:user", getUserDetails);
 app.get("/:user/repos", getUserRepos);
 app.get("/repos/:user/:repo/languages", getUserRepoLanguages);
@@ -62,4 +64,4 @@ app.get("/repos/:user/:repo/languages", getUserRepoLanguages);
 //Creating a dynamic port
 const PORT = process.env.PORT || 4000;
 
-app.listen(PORT, () => console.log(`app listening to port ${PORT}`));
+app.listen(PORT, () => console.log(`app listening to port ${PORT}`)); // Listening to the port
