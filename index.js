@@ -35,12 +35,29 @@ const getUserRepos = async (req, res) => {
       data: data,
     });
   } catch (error) {
-    return res.status(404).json({ msg: "No User Found.!" });
+    return res.status(404).json({ msg: "error" });
   }
 };
 
+const getUserRepoLanguages = async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  try {
+    const username = req.params.user;
+    const repository = req.params.repo;
+    const data = await axios.get(`https://api.github.com/repos/${username}/${repository}/languages`);
+    return res.status(200).json({
+      msg: "User Repositories Found",
+      data: data.data,  // data.data is used because the data is nested in the response
+    });
+  }
+  catch (error) {
+    return res.status(404).json({ msg: "error" });
+  }
+}
+
 app.get("/:user", getUserDetails);
 app.get("/:user/repos", getUserRepos);
+app.get("/repos/:user/:repo/languages", getUserRepoLanguages);
 
 //Creating a dynamic port
 const PORT = process.env.PORT || 4000;
