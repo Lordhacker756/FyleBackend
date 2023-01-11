@@ -10,11 +10,7 @@ const getUserDetails = async (req, res) => {
   try {
     const username = req.params.user;  // Getting the username from the request
     const response = await axios.get(
-      `https://api.github.com/users/${username}`, {
-      headers: {
-        'Authorization': "TOKEN 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"
-      }
-    }
+      `https://api.github.com/users/${username}`
     );
     const data = await response.data;
     return res.status(200).json({
@@ -22,6 +18,7 @@ const getUserDetails = async (req, res) => {
       data: data,
     });
   } catch (error) {
+    console.log(error)
     return res.status(404).json({
       msg: "No User Found.!",
       error: error
@@ -35,11 +32,7 @@ const getUserRepos = async (req, res) => {
   try {
     const username = req.params.user;
     const response = await axios.get(
-      `https://api.github.com/users/${username}/repos?per_page=100&sort="updated"`, {
-      headers: {
-        'Authorization': "TOKEN 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"
-      }
-    }
+      `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`
     );
     const data = await response.data;
     return res.status(200).json({
@@ -60,11 +53,7 @@ const getUserRepoLanguages = async (req, res) => {
   try {
     const username = req.params.user;
     const repository = req.params.repo;
-    const data = await axios.get(`https://api.github.com/repos/${username}/${repository}/languages`, {
-      headers: {
-        'Authorization': "TOKEN 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"
-      }
-    });
+    const data = await axios.get(`https://api.github.com/repos/${username}/${repository}/languages`);
     return res.status(200).json({
       msg: "User Repositories Found",
       data: data.data,  // data.data is used because the data is nested in the response
