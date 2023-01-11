@@ -1,5 +1,5 @@
 const express = require("express");
-export const app = express();
+const app = express();
 const axios = require("axios");
 
 // Creating a controller to get user details
