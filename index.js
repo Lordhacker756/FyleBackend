@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const axios = require("axios");
 
+
+const headers = { 'Auth-Token': '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' }
 // Creating a controller to get user details
 // Controller is a type of callback function which fires everytime a server gets a request in a specified route just like a constructor
 
@@ -11,7 +13,7 @@ const getUserDetails = async (req, res) => {
     const username = req.params.user;  // Getting the username from the request
     const response = await axios.get(
       `https://api.github.com/users/${username}`
-    );
+      , headers);
     const data = await response.data;
     return res.status(200).json({
       msg: "User Found",
@@ -33,7 +35,7 @@ const getUserRepos = async (req, res) => {
     const username = req.params.user;
     const response = await axios.get(
       `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`
-    );
+      , headers);
     const data = await response.data;
     return res.status(200).json({
       msg: "User Repositories Found",
@@ -53,7 +55,7 @@ const getUserRepoTopics = async (req, res) => {
   try {
     const username = req.params.user;
     const repository = req.params.repo;
-    const data = await axios.get(`https://api.github.com/repos/${username}/${repository}/topics`);
+    const data = await axios.get(`https://api.github.com/repos/${username}/${repository}/topics`, headers);
     return res.status(200).json({
       msg: "User Repositories Found",
       data: data.data,  // data.data is used because the data is nested in the response
