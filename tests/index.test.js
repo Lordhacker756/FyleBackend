@@ -38,18 +38,18 @@ describe("GET /getUserDetails", () => {
 });
 
 // Test case for getUserRepoLanguages endpoint
-describe("GET /getUserRepoLanguages", () => {
+describe("GET /getUserRepoTopics", () => {
   it("valid GET request to the endpoint", async () => {
     const res = await chai
       .request("http://localhost:4000")
-      .get("/repos/Lordhacker756/open-dashboard/languages");
+      .get("/repos/Lordhacker756/open-dashboard/topics");
     expect(res).to.have.status(200);
   });
 
   it("invalid GET request to the endpoint", async () => {
     const res = await chai
       .request("http://localhost:4000")
-      .get("/repos/Lordhacker75657657a/open-dashboard/languages");
+      .get("/repos/Lordhacker75657657a/open-dashboard/topics");
     expect(res).to.have.status(404);
   });
 });

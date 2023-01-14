@@ -48,12 +48,12 @@ const getUserRepos = async (req, res) => {
 };
 
 // Controller to get languages used in the repositories
-const getUserRepoLanguages = async (req, res) => {
+const getUserRepoTopics = async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   try {
     const username = req.params.user;
     const repository = req.params.repo;
-    const data = await axios.get(`https://api.github.com/repos/${username}/${repository}/languages`);
+    const data = await axios.get(`https://api.github.com/repos/${username}/${repository}/topics`);
     return res.status(200).json({
       msg: "User Repositories Found",
       data: data.data,  // data.data is used because the data is nested in the response
@@ -70,7 +70,7 @@ const getUserRepoLanguages = async (req, res) => {
 // Routes to get user details, repositories and languages used in the repositories
 app.get("/:user", getUserDetails);
 app.get("/:user/repos", getUserRepos);
-app.get("/repos/:user/:repo/languages", getUserRepoLanguages);
+app.get("/repos/:user/:repo/topics", getUserRepoTopics);
 
 //Creating a dynamic port
 const PORT = process.env.PORT || 4000;
