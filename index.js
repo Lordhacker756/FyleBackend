@@ -3,7 +3,7 @@ const app = express();
 const axios = require("axios");
 
 
-const headers = { 'Auth-Token': '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' }
+const headers = { 'auth': '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' }
 // Creating a controller to get user details
 // Controller is a type of callback function which fires everytime a server gets a request in a specified route just like a constructor
 
